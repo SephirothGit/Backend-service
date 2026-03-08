@@ -81,8 +81,6 @@ http://localhost:8080
 
 ## Tests
 
-Unit tests cover the domain business logic.
-
 ### Run domain tests:
 
 ```
@@ -94,6 +92,11 @@ go test ./internal/domain -v
 go test ./internal/service -v
 ```
 
+### Run handler tests:
+```
+go test ./internal/handler - v
+```
+
 Test coverage includes:
 
 - domain status transition rules
@@ -103,6 +106,9 @@ Test coverage includes:
 - service layer logic
 - repository interaction via mocks
 - event publishing
+- HTTP handler behavior
+- HTTP status code mapping
+- request validation
 
 ## API
 
