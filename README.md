@@ -20,6 +20,7 @@ Production-style Go backend service implementing order status management with cl
 * Optimistic locking (Version field)
 * Domain events
 * Unit tests
+* Integration tests
 
 ---
 
@@ -82,7 +83,6 @@ http://localhost:8080
 ## Tests
 
 ### Run domain tests:
-
 ```
 go test ./internal/domain -v
 ```
@@ -94,21 +94,28 @@ go test ./internal/service -v
 
 ### Run handler tests:
 ```
-go test ./internal/handler - v
+go test ./internal/handler -v
+```
+
+### Run integration tests
+```
+go test ./internal/integration -v
 ```
 
 Test coverage includes:
 
-- domain status transition rules
-- idempotent operations
-- version increment
-- domain event creation
-- service layer logic
-- repository interaction via mocks
-- event publishing
+- Domain status transition rules
+- Idempotent operations
+- Version increment
+- Domain event creation
+- Service layer logic
+- Repository interaction via mocks
+- Event publishing
 - HTTP handler behavior
 - HTTP status code mapping
-- request validation
+- Request validation
+- API request validation
+- End-to-end API flow (integration tests)
 
 ## API
 
@@ -378,7 +385,6 @@ This project demonstrates:
 * Outbox pattern
 * OpenAPI documentation
 * Docker support
-* Integration tests
 
 ---
 
