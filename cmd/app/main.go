@@ -11,7 +11,9 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
+	"github.com/joho/godotenv"
 
+	"github.com/SephirothGit/Backend-service/internal/config"
 	"github.com/SephirothGit/Backend-service/internal/handler"
 	"github.com/SephirothGit/Backend-service/internal/repository"
 	"github.com/SephirothGit/Backend-service/internal/server"
@@ -19,6 +21,8 @@ import (
 )
 
 func main() {
+	godotenv.Load()
+	cfg := config.Load
 
 	if err := server.InitLogger(); err != nil {
 		log.Fatalf("failed to init logger: %v", err)
@@ -39,17 +43,17 @@ func main() {
 	wrapped = server.Timeout504Middleware(wrapped)
 
 	srv := server.NewServer(server.Config{
-		Addr:              ":8080",
+		Addr:              ":" + cfg.Port,
 		ReadTimeout:       5 * time.Second,
 		WriteTimeout:      10 * time.Second,
 		IdleTimeout:       60 * time.Second,
 		ReadHeaderTimeout: 2 * time.Second,
 	}, wrapped)
 
-	generateToken()
+	generateToken(cfg)
 
 	go func() {
-		log.Println("Server started on :8080")
+		log.Println("Server started on :" + cfg.Port)
 		if err := srv.Start(); err != nil && err != http.ErrServerClosed {
 			log.Fatalf("Server failed %v", err)
 		}
@@ -77,6 +81,6 @@ func generateToken() {
 		"exp":     time.Now().Add(time.Hour).Unix(),
 	})
 
-	tokenStr, _ := token.SignedString([]byte("supersecretkey"))
+	tokenStr, _ := token.SignedString([]byte(jwt.JWTSecret))
 	fmt.Println(tokenStr)
 }
