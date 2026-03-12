@@ -6,11 +6,11 @@ import (
 	"time"
 )
 
-type config struct {
+type Config struct {
 	Port         string
 	JWTSecret    string
 	RateLimit    int
-	TimeDuration time.Duration
+	RequestTimeout time.Duration
 }
 
 func Load() Config {
@@ -22,6 +22,6 @@ func Load() Config {
 		Port:           os.Getenv("PORT"),
 		JWTSecret:      os.Getenv("JWT_SECRET"),
 		RateLimit:      ratelimit,
-		RequestTimeout: tume.Duration(timeout) * time.Second,
+		RequestTimeout: time.Duration(timeout) * time.Second,
 	}
 }

@@ -22,7 +22,7 @@ import (
 
 func main() {
 	godotenv.Load()
-	cfg := config.Load
+	cfg := config.Load()
 
 	if err := server.InitLogger(); err != nil {
 		log.Fatalf("failed to init logger: %v", err)
@@ -31,7 +31,7 @@ func main() {
 
 	repo := repository.NewInMemoryOrderRepository()
 	svc := service.NewOrderService(repo)
-	
+
 	orderHandlerV1 := handler.NewOrderHandler(svc)
 	orderHandlerV2 := handler.NewOrderHandlerV2(svc)
 
@@ -75,12 +75,12 @@ func main() {
 }
 
 // JWT
-func generateToken() {
+func generateToken(cfg config.Config) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"user_id": "123",
 		"exp":     time.Now().Add(time.Hour).Unix(),
 	})
 
-	tokenStr, _ := token.SignedString([]byte(jwt.JWTSecret))
+	tokenStr, _ := token.SignedString([]byte(cfg.JWTSecret))
 	fmt.Println(tokenStr)
 }
