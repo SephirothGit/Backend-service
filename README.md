@@ -22,6 +22,7 @@ Production-style Go backend service implementing order status management with cl
 * Unit tests
 * Integration tests
 * Environment-based configuration (.env)
+* Swagger/OpenAPI documentation
 
 ---
 
@@ -149,6 +150,14 @@ curl -X PUT http://localhost:8080/api/v1/orders/123 \
 -H "Content-Type: application/json" \
 -d '{"status":"paid"}'
 ```
+
+---
+
+## API documentation
+
+Swagger UI available at:
+
+http://localhost:8080/swagger/index.html
 
 ---
 
