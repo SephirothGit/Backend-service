@@ -18,6 +18,7 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/joho/godotenv"
+	_ "github.com/SephirothGit/Backend-service/docs"
 
 	"github.com/SephirothGit/Backend-service/internal/config"
 	"github.com/SephirothGit/Backend-service/internal/handler"
