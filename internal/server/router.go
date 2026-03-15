@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/swaggo/http-swagger"
+	httpSwagger "github.com/swaggo/http-swagger"
 )
 
 type RouterDeps struct {
@@ -36,18 +36,13 @@ func NewRouter(deps RouterDeps) http.Handler {
 
 	// API v1
 	r.Route("/api/v1", func(r chi.Router) {
+		r.Use(JWTAuthMiddleware("supersecretkey"))
 		r.Put("/orders/{id}", deps.OrderHandlerV1)
 	})
 
 	// API v2
 	r.Route("/api/v2", func(r chi.Router) {
 		r.Put("/orders/{id}/status", deps.OrderHandlerV2)
-	})
-
-	// JWT
-	r.Route("/api/v1", func(r chi.Router) {
-		r.Use(JWTAuthMiddleware("supersecretkey"))
-		r.Put("/orders/{id}", deps.OrderHandlerV1)
 	})
 
 	// Custom error 404
