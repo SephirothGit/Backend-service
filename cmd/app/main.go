@@ -1,3 +1,9 @@
+// @title Order Service API
+// @version 1.0
+// @description Production-style backend service for order status management
+// @host localhost:8080
+// @BasePath /
+
 package main
 
 import (

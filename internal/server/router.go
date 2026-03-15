@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
+	"github.com/swaggo/http-swagger"
 )
 
 type RouterDeps struct {
@@ -31,6 +32,7 @@ func NewRouter(deps RouterDeps) http.Handler {
 	r.Get("/health", healthHandler)
 	r.Get("/ready", readinessHandler)
 	r.Handle("/metrics", MetricsHandler())
+	r.Get("/swagger/*", httpSwagger.WrapHandler)
 
 	// API v1
 	r.Route("/api/v1", func(r chi.Router) {

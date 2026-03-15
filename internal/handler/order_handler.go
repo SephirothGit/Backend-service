@@ -1,3 +1,18 @@
+// UpdateOrderStatus godoc
+// @Summary Update order status
+// @Description Updates the status of an existing order
+// @Tags orders
+// @Accept json
+// @Produce json
+// @Param id path string true "Order ID"
+// @Param request body UpdateOrderRequest true "Status update"
+// @Success 204 "No Content"
+// @Failure 400 {object} ErrorResponse
+// @Failure 404 {object} ErrorResponse
+// @Failure 409 {object} ErrorResponse
+// @Failure 500 {object} ErrorResponse
+// @Router /api/v1/orders/{id} [put]
+
 package handler
 
 import (
