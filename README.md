@@ -21,6 +21,7 @@ Production-style Go backend service implementing order status management with cl
 * Domain events
 * Unit tests
 * Integration tests
+* Environment-based configuration (.env)
 
 ---
 
